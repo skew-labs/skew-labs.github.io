@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Un Huh, founder of Skew Labs. Self-taught builder of trading infrastructure on Solana.">
+<title>Un Huh</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: a README rendered as a website. One mono face, browser-default rhythm,
+   plain white paper with a faint grain, and a single red-pencil mark on the numbers that matter. */
+:root {
+  --paper: #ffffff;
+  --ink: #16171a;
+  --dim: #6b6f76;
+  --link: #1d3fd0;
+  --red: #c8372d;
+  --hr: #e4e5e7;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --f-mono: "Source Code Pro", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121315; --ink: #e6e6e3; --dim: #8d9198; --link: #8fb0ff; --red: #ff7a6b; --hr: #2a2c30;
+    --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .035 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121315; --ink: #e6e6e3; --dim: #8d9198; --link: #8fb0ff; --red: #ff7a6b; --hr: #2a2c30;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .035 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper) var(--grain);
+  color: var(--ink);
+  font: 400 15px/1.6 var(--f-mono);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+#content { max-width: 780px; padding-block: 28px 80px; overflow-wrap: break-word; }
+
+h1 { font-size: 2em; font-weight: 600; margin: .4em 0 .3em; }
+h2 { font-size: 1.45em; font-weight: 600; margin: 1.9em 0 .5em; padding-bottom: .25em; border-bottom: 1px solid var(--hr); }
+h3 { font-size: 1.12em; font-weight: 600; margin: 1.5em 0 .3em; }
+h4 { font-size: 1em; font-weight: 600; margin: 1.2em 0 .2em; }
+p { margin: .6em 0; max-width: 68ch; }
+ul { margin: .3em 0; padding-left: 1.4em; }
+li { margin: .15em 0; }
+li::marker { color: var(--dim); }
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px dashed var(--link); outline-offset: 2px; }
+.dim { color: var(--dim); }
+.light { font-weight: 200; }
+strong { font-weight: 600; }
+
+pre.banner {
+  margin: 0 0 4px; font: 400 clamp(6px, 1.9vw, 13px)/1.15 var(--f-mono); color: var(--ink);
+  overflow-x: auto; white-space: pre;
+}
+
+/* red pencil underline on the numbers that matter */
+.mark { position: relative; white-space: nowrap; }
+.mark svg { position: absolute; left: -2%; bottom: -5px; width: 104%; height: 8px; overflow: visible; pointer-events: none; }
+.mark path { fill: none; stroke: var(--red); stroke-width: 1.8; stroke-linecap: round; vector-effect: non-scaling-stroke; filter: url(#pencil); }
+
+table { border-collapse: collapse; font-size: .93em; }
+.tbl { overflow-x: auto; }
+th, td { text-align: left; padding: 4px 14px 4px 0; vertical-align: top; }
+th { font-weight: 600; color: var(--dim); }
+td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="pencil" x="-5%" y="-50%" width="110%" height="200%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="4" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div id="content">
+
+<pre class="banner" aria-label="skew labs" title="skew labs">
+     _                        _       _
+ ___| | _______      __      | | __ _| |__  ___
+/ __| |/ / _ \ \ /\ / /____  | |/ _` | '_ \/ __|
+\__ \   &lt;  __/\ V  V /_____| | | (_| | |_) \__ \
+|___/_|\_\___| \_/\_/        |_|\__,_|_.__/|___/
+</pre>
+
+<h1>Un Huh</h1>
+<p>Founder of Skew Labs. Self-taught builder from Seoul. I studied physical education, not computer science. I build trading infrastructure on Solana, mostly alone, with AI doing the detailed implementation and me owning the architecture and the plan.</p>
+
+<h2>Contact</h2>
+<ul>
+  <li>Email: skewceo@skew.deals</li>
+  <li>GitHub: <a href="https://github.com/skew-labs" target="_blank" rel="noopener">https://github.com/skew-labs</a></li>
+  <li>GitHub: <a href="https://github.com/skewlabs2" target="_blank" rel="noopener">https://github.com/skewlabs2</a></li>
+</ul>
+
+<h2>Highlights</h2>
+<ul>
+  <li><span class="mark">2nd place</span>, Colosseum Frontier Hackathon, Korea side track. Skew.</li>
+  <li><span class="mark">2nd place</span>, GWDC 2026 Korea, TRON Challenge. FAAT.</li>
+  <li><span class="mark">~$20K revenue</span>, ~700 users, ~$210K volume on skew.deals permissionless perps</li>
+  <li>Selected for <span class="mark">Arbitrum Founder House</span>, Oct 23–25, 2026, with Ticking</li>
+  <li>Market-making agreement with a crypto exchange</li>
+  <li>Runs <span class="mark">ultra-low-latency Solana nodes</span> on bare metal. MEV research and operations.</li>
+</ul>
+
+<h2>Software Projects</h2>
+
+<h3>skew.deals</h3>
+<ul>
+  <li>Permissionless perpetual futures on Solana. Anyone can list a market. Worst-case loss is escrowed before a trade goes live, so the venue cannot go insolvent.</li>
+  <li>~700 users · ~$210K volume · ~$20K revenue <span class="dim">(self-reported; on-chain records on request)</span></li>
+  <li>Archived venue (2026-07-01): <a href="https://web.archive.org/web/20260701114235/https://skew.deals/markets" target="_blank" rel="noopener">https://web.archive.org/web/20260701114235/https://skew.deals/markets</a></li>
+  <li>Perp engine (partial source): <a href="https://github.com/skewlabs2/skew-perp-engine" target="_blank" rel="noopener">https://github.com/skewlabs2/skew-perp-engine</a></li>
+  <li>Whitepaper: <a href="https://github.com/skew-labs/Aether-whitepaper" target="_blank" rel="noopener">https://github.com/skew-labs/Aether-whitepaper</a></li>
+</ul>
+
+<h3>Economic Machine / FAAT</h3>
+<ul>
+  <li>Runtime that lets AI agents trade inside typed policies and hard capital limits. Every action leaves a receipt. Mainnet pilot on Arbitrum.</li>
+  <li>2nd place, GWDC 2026 Korea TRON Challenge</li>
+  <li><a href="https://github.com/skew-labs/economic-machine" target="_blank" rel="noopener">https://github.com/skew-labs/economic-machine</a></li>
+  <li>Working paper: <a href="https://github.com/skew-labs/economic-machine-research" target="_blank" rel="noopener">https://github.com/skew-labs/economic-machine-research</a></li>
+</ul>
+
+<h3>Low-latency nodes &amp; MEV</h3>
+<ul>
+  <li>Operate ultra-low-latency Solana nodes on rented bare metal.</li>
+  <li>Studied and modified a Firedancer/Agave execution path for prediction-market execution. Planned the architecture and staged the changes.</li>
+  <li>MEV research and live MEV operations.</li>
+  <li class="dim">Private. Walkthrough on request.</li>
+</ul>
+
+<h3>ZeroDrift</h3>
+<ul>
+  <li>One no_std Rust state-transition function compiled to both a native executor and a RISC Zero zkVM guest, fuzzed against each other until a single bit of divergence halts the run.</li>
+  <li><a href="https://github.com/skew-labs/zero-drift" target="_blank" rel="noopener">https://github.com/skew-labs/zero-drift</a></li>
+</ul>
+
+<h3>Skew Options</h3>
+<ul>
+  <li>On-chain OTC options for Solana: RFQ fills, portfolio margin, Pyth settlement. Ships an npm SDK and an MCP server so an AI agent can trade an option in one prompt.</li>
+  <li><a href="https://github.com/skew-labs/skewarchive" target="_blank" rel="noopener">https://github.com/skew-labs/skewarchive</a></li>
+</ul>
+
+<h3>Ticking</h3>
+<ul>
+  <li>Market-data engine with native collectors, a delivery API, an embeddable chart SDK and a pro terminal.</li>
+  <li>Selected for Arbitrum Founder House, Oct 23–25, 2026</li>
+  <li><a href="https://github.com/skew-labs/ticking" target="_blank" rel="noopener">https://github.com/skew-labs/ticking</a></li>
+</ul>
+
+<h3>Strike</h3>
+<ul>
+  <li>Verification coprocessor for clearing systems: multi-oracle aggregation, private margin attestation in AWS Nitro enclaves, ZK predicate research.</li>
+  <li><a href="https://github.com/skew-labs/maedup" target="_blank" rel="noopener">https://github.com/skew-labs/maedup</a></li>
+</ul>
+
+<h3>Also</h3>
+<ul>
+  <li>flex-os, autonomy for energy-constrained AI infrastructure: <a href="https://github.com/skew-labs/flex-os" target="_blank" rel="noopener">https://github.com/skew-labs/flex-os</a></li>
+  <li>Sinabro, local self-evolving multi-LoRA agent: <a href="https://github.com/skew-labs/Sinabro" target="_blank" rel="noopener">https://github.com/skew-labs/Sinabro</a></li>
+  <li>Dol, 3-tap market-neutral yield: <a href="https://github.com/skew-labs/dol" target="_blank" rel="noopener">https://github.com/skew-labs/dol</a></li>
+  <li>Rally, creator markets on Monad: <a href="https://github.com/skew-labs/rally" target="_blank" rel="noopener">https://github.com/skew-labs/rally</a></li>
+</ul>
+
+<h2>Hackathon Wins</h2>
+
+<h4>Colosseum Frontier Hackathon, Korea side track</h4>
+<ul>
+  <li>Second Place, Skew (options exchange). Built with a high-school friend: he did the quant models, I did the Solana contracts.</li>
+  <li><a href="https://x.com/SuperteamKorea/status/2072992261357609369" target="_blank" rel="noopener">https://x.com/SuperteamKorea/status/2072992261357609369</a></li>
+</ul>
+
+<h4>GWDC 2026 Korea, TRON Challenge</h4>
+<ul>
+  <li>Second Place, FAAT. Same friend, same split.</li>
+  <li><a href="https://www.tokenpost.kr/news/insights/416396" target="_blank" rel="noopener">https://www.tokenpost.kr/news/insights/416396</a></li>
+  <li><a href="https://github.com/skew-labs/gwdc2026" target="_blank" rel="noopener">https://github.com/skew-labs/gwdc2026</a></li>
+</ul>
+
+<h2>Programs</h2>
+
+<h4>Arbitrum Founder House</h4>
+<ul>
+  <li>Selected with Ticking, Oct 23–25, 2026</li>
+  <li><a href="https://x.com/arbitrum/status/2113460925906976912" target="_blank" rel="noopener">https://x.com/arbitrum/status/2113460925906976912</a></li>
+</ul>
+
+<h2>Now</h2>
+<ul>
+  <li>Markets on computing prices. Collecting real compute-pricing data, building indices, running simulated trading on them.</li>
+  <li>Moving toward what software alone can't copy: execution infrastructure, hardware access, customers.</li>
+</ul>
+
+<h2>How I Work</h2>
+<ul>
+  <li>I set the architecture and the plan, split the work into small changes, and direct AI through them.</li>
+  <li>Every change has to match a reference implementation, bit for bit, before it merges.</li>
+  <li>AI still loses context on large projects, so the whole plan stays with me.</li>
+</ul>
+
+<h2>Tools I Use</h2>
+<div class="tbl">
+<table>
+  <tr><th>Languages</th><td>Rust, TypeScript, Python, Solidity, Move, C++</td></tr>
+  <tr><th>Chains</th><td>Solana, Sui, TRON, Arbitrum, Base, Monad</td></tr>
+  <tr><th>AI</th><td>Claude Code, Codex</td></tr>
+  <tr><th>Infra</th><td>Bare-metal Solana nodes, Firedancer/Agave, Vercel, Fly.io</td></tr>
+</table>
+</div>
+
+<h2>Formal Education</h2>
+<p>Physical Education (sports science, sports data analysis), Chung-Ang University, Seoul<br><span class="dim">Two years, currently on leave</span></p>
+
+<h2>There Is Work To Be Done</h2>
+<p>I know how to teach myself an unfamiliar technical field and turn it into a working system. Next I want to learn how to find customers, build relationships, and turn that work into a company that lasts.</p>
+<p class="dim light">last updated 2026-10-27</p>
+
+</div>
+
+<script>
+// Draw a slightly uneven red-pencil underline under each .mark. Deterministic per load.
+(function () {
+  var seed = 5, NS = "http://www.w3.org/2000/svg";
+  function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  document.querySelectorAll(".mark").forEach(function (el) {
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 100 8");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("aria-hidden", "true");
+    var d = "M0 " + (4 + rnd() * 2).toFixed(1);
+    for (var x = 12; x <= 100; x += 12) d += " L" + x + " " + (3 + rnd() * 3).toFixed(1);
+    var p = document.createElementNS(NS, "path");
+    p.setAttribute("d", d);
+    svg.appendChild(p);
+    el.appendChild(svg);
+  });
+})();
+</script>
+</body>
+</html>
